@@ -1,0 +1,749 @@
+/* ==========================================================================
+   COLOR PALETTE & CORE VARIABLES
+   ========================================================================== */
+:root {
+  --bg-sand: #F7F3EB;          /* Warm background */
+  --header-bg: #1B110B;        /* Dark espresso header */
+  --footer-bg: #1B110B;        /* Dark espresso footer */
+  --text-dark: #2B1D15;        /* Deep charcoal/brown heading text */
+  --text-muted: #5C524A;       /* Readable descriptive text */
+  --orange-accent: #E65A1E;    /* Signature TrackDrive orange */
+  --orange-hover: #CF4C14;
+  --form-card-bg: #FFFFFF;
+  --tab-inactive-bg: transparent;
+  --tab-inactive-text: #6C6259;
+  --tab-active-bg: #2B1D15;
+  --tab-active-text: #FFFFFF;
+  --input-bg: #FCFAF7;
+  --input-border: #E8E1D7;
+  --input-border-focus: #E65A1E;
+  --btn-dark: #2B1D15;
+  --btn-dark-hover: #180F0A;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-sand);
+  color: var(--text-dark);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   NAVBAR & LOGO
+   ========================================================================== */
+.navbar {
+  background-color: var(--header-bg);
+  padding: 10px 48px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.brand-logo:hover {
+  transform: translateY(-1px);
+}
+
+.brand-svg-logo {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #C8BFB6;
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.nav-links a:hover {
+  color: #FFFFFF;
+}
+
+.nav-links .nav-login-link {
+  color: #FFFFFF;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.nav-links .nav-signup-btn {
+  background-color: var(--orange-accent);
+  color: #FFFFFF !important;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-weight: 600 !important;
+}
+
+.nav-links .nav-signup-btn:hover {
+  background-color: var(--orange-hover);
+  transform: translateY(-1px);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   MAIN HERO LAYOUT
+   ========================================================================== */
+.main-wrapper {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* ==========================================================================
+   INTEGRATED POSTER CARD (EXACT MATCH TO YOUR IMAGE)
+   ========================================================================== */
+.left-hero {
+  display: flex;
+}
+
+.integrated-truck-card {
+  position: relative;
+  width: 100%;
+  min-height: 700px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(43, 29, 21, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #261710;
+}
+
+/* Full Poster Background Image */
+.poster-image-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.poster-truck-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  transform: scale(1.01);
+  transition: transform 0.7s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.4s ease;
+}
+
+/* Subtle atmosphere gradients for seamless text legibility */
+.sky-top-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52%;
+  background: linear-gradient(180deg, rgba(247, 241, 230, 0.95) 0%, rgba(245, 235, 218, 0.78) 45%, rgba(240, 225, 205, 0) 100%);
+  pointer-events: none;
+}
+
+.road-bottom-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 38%;
+  background: linear-gradient(0deg, rgba(18, 11, 7, 0.96) 0%, rgba(24, 15, 10, 0.78) 50%, rgba(24, 15, 10, 0) 100%);
+  pointer-events: none;
+}
+
+/* Interactive Hover effect on the Poster */
+.integrated-truck-card:hover .poster-truck-img {
+  transform: scale(1.05);
+  filter: contrast(1.05) brightness(1.02);
+}
+
+/* Top Typography Section */
+.poster-header-content {
+  position: relative;
+  z-index: 2;
+  padding: 44px 44px 20px 44px;
+}
+
+.sub-heading {
+  color: var(--orange-accent);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.main-heading {
+  font-size: 48px;
+  line-height: 1.12;
+  color: #24160E;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  margin-bottom: 16px;
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: #4A3E35;
+  font-weight: 500;
+  line-height: 1.55;
+  max-width: 480px;
+}
+
+/* Bottom Features Bar (Badges on the asphalt road) */
+.poster-features-bar {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 24px 20px 32px 20px;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 0 8px;
+}
+
+.feature-item:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.feature-icon {
+  color: var(--orange-accent);
+  font-size: 16px;
+  transition: transform 0.25s ease;
+}
+
+.feature-item:hover .feature-icon {
+  transform: translateY(-2px);
+}
+
+.feature-text strong {
+  display: block;
+  font-size: 12px;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.feature-text span {
+  font-size: 10px;
+  color: #A3968B;
+}
+
+/* ==========================================================================
+   RIGHT SIDE: AUTHENTICATION PANEL
+   ========================================================================== */
+.right-form-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background: var(--form-card-bg);
+  width: 100%;
+  max-width: 470px;
+  padding: 38px 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(43, 29, 21, 0.05);
+  border: 1px solid rgba(43, 29, 21, 0.04);
+}
+
+/* Dual Tab Switcher Pill */
+.tab-switch-box {
+  display: flex;
+  background-color: #F1ECE4;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 24px;
+  gap: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  border: none;
+  background: var(--tab-inactive-bg);
+  color: var(--tab-inactive-text);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tab-btn i {
+  font-size: 14px;
+}
+
+.tab-btn.active {
+  background-color: var(--tab-active-bg);
+  color: var(--tab-active-text);
+  box-shadow: 0 4px 10px rgba(43, 29, 21, 0.15);
+}
+
+.tab-btn:not(.active):hover {
+  color: var(--text-dark);
+}
+
+.auth-header {
+  margin-bottom: 22px;
+}
+
+.auth-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.auth-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 7px;
+}
+
+.input-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-field .input-icon {
+  position: absolute;
+  left: 15px;
+  color: #A3968B;
+  font-size: 15px;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 13px 14px 13px 44px;
+  font-size: 13.5px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--input-bg);
+  color: var(--text-dark);
+  transition: var(--transition);
+  outline: none;
+}
+
+.input-field input:focus {
+  border-color: var(--input-border-focus);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(230, 90, 30, 0.12);
+}
+
+.eye-toggle {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #A3968B;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.eye-toggle:hover {
+  color: var(--text-dark);
+}
+
+.form-auxiliary {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.forgot-link {
+  font-size: 12.5px;
+  color: var(--orange-accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  color: var(--orange-hover);
+  text-decoration: underline;
+}
+
+/* Action Submit Button */
+.btn-submit {
+  width: 100%;
+  background: var(--btn-dark);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: var(--transition);
+}
+
+.btn-submit:hover {
+  background: var(--btn-dark-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(43, 29, 21, 0.2);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: #A3968B;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--input-border);
+}
+
+.divider span {
+  padding: 0 12px;
+}
+
+/* Social Buttons */
+.social-login-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-social {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 11px;
+  background: #FFFFFF;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-social .social-svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-social .apple-icon {
+  font-size: 18px;
+  color: #000000;
+}
+
+.btn-social:hover {
+  background-color: var(--input-bg);
+  border-color: #D6CCC0;
+  transform: translateY(-1px);
+}
+
+/* Bottom Toggle Prompt */
+.auth-bottom-text {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.auth-bottom-text a {
+  color: var(--orange-accent);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s;
+}
+
+.auth-bottom-text a:hover {
+  color: var(--orange-hover);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   TRUST INFO BANNER
+   ========================================================================== */
+.trust-banner {
+  max-width: 1380px;
+  margin: 10px auto 40px;
+  padding: 24px;
+  text-align: center;
+}
+
+.trust-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #42352B;
+  margin-bottom: 28px;
+}
+
+.trust-grid {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.trust-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+}
+
+.trust-icon {
+  font-size: 26px;
+  color: var(--text-dark);
+}
+
+.trust-info h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.trust-info p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer {
+  background-color: var(--footer-bg);
+  color: #B5AAA0;
+  padding: 38px 48px 24px;
+}
+
+.footer-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12.5px;
+}
+
+.footer-nav a {
+  color: #B5AAA0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: #FFFFFF;
+}
+
+.footer-nav .sep {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-socials a {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 13px;
+  transition: var(--transition);
+}
+
+.footer-socials a:hover {
+  background: var(--orange-accent);
+  transform: translateY(-2px);
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 11.5px;
+  color: #7A6F65;
+  padding-top: 20px;
+}
+
+/* ==========================================================================
+   MOBILE & RESPONSIVE COMPATIBILITY
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .main-wrapper {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .integrated-truck-card {
+    min-height: 600px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 18px;
+  }
+
+  .brand-svg-logo {
+    height: 38px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .main-wrapper {
+    padding: 20px 14px;
+    gap: 24px;
+  }
+
+  /* Compact responsive poster for mobile */
+  .integrated-truck-card {
+    min-height: 520px;
+  }
+
+  .poster-header-content {
+    padding: 24px 20px 16px 20px;
+  }
+
+  .main-heading {
+    font-size: 32px;
+  }
+
+  .hero-desc {
+    font-size: 13.5px;
+  }
+
+  .poster-features-bar {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 14px;
+    padding: 16px 12px 20px 12px;
+  }
+
+  .feature-item:nth-child(2) {
+    border-right: none;
+  }
+
+  .auth-card {
+    padding: 24px 20px;
+  }
+
+  .trust-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}
