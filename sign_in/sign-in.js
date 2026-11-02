@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const authForm = document.getElementById('authForm');
   const googleBtn = document.getElementById('googleBtn');
   const appleBtn = document.getElementById('appleBtn');
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  
 
   let isSignUpMode = false;
 
@@ -134,9 +134,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', () => {
-      alert('Mobile menu toggled.');
+  // Mobile Drawer Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navDrawer = document.getElementById('navDrawer');
+
+if (mobileMenuBtn && navDrawer) {
+  mobileMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = navDrawer.classList.toggle('open');
+    mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+
+    // Switch icon between bars and close X
+    const icon = mobileMenuBtn.querySelector('i');
+    if (icon) {
+      icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    }
+  });
+
+  // Close the drawer when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+      navDrawer.classList.remove('open');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (icon) icon.className = 'fa-solid fa-bars';
+    }
+  });
+
+  // Close the drawer when clicking any nav link
+  navDrawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navDrawer.classList.remove('open');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      const icon = mobileMenuBtn.querySelector('i');
+      if (icon) icon.className = 'fa-solid fa-bars';
     });
-  }
+  });
+}
 });

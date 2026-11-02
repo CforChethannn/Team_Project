@@ -132,7 +132,7 @@ body {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 40px;
-  align-items: stretch;
+  align-items: flex-start; /* Changed from stretch to flex-start */
 }
 
 /* ==========================================================================
@@ -140,12 +140,16 @@ body {
    ========================================================================== */
 .left-hero {
   display: flex;
+  align-self: flex-start;
+  width: 100%;
 }
 
 .integrated-truck-card {
   position: relative;
   width: 100%;
-  min-height: 700px;
+  height: 640px;      /* Set an explicit height */
+  min-height: 640px;  /* Locks height when the form grows */
+  max-height: 640px;  /* Prevents any vertical expansion */
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: 0 16px 36px rgba(43, 29, 21, 0.12);
@@ -674,9 +678,9 @@ body {
   }
 
   .integrated-truck-card {
-    min-height: 600px;
-    max-width: 720px;
-    margin: 0 auto;
+    height: 520px;
+    min-height: 520px;
+    max-height: 520px;
   }
 }
 
@@ -745,5 +749,288 @@ body {
     flex-direction: column;
     gap: 20px;
     text-align: center;
+  }
+}/* ==========================================================================
+   CUSTOM EMBLEM SVG LOGO STYLING
+   ========================================================================== */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+
+.brand-logo:hover {
+  transform: translateY(-1px);
+}
+
+.logo-mark-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.custom-emblem-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(235, 139, 52, 0.28));
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover .custom-emblem-svg {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  line-height: 1.1;
+}
+
+.brand-name span {
+  color: #EB8B34;
+}
+
+.brand-tagline {
+  color: #A3968B;
+  font-size: 8.5px;
+  letter-spacing: 1.6px;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+@media (max-width: 768px) {
+  .logo-mark-wrap {
+    width: 38px;
+    height: 38px;
+  }
+  .brand-name {
+    font-size: 18px;
+  }
+  .brand-tagline {
+    font-size: 7.5px;
+    letter-spacing: 1.2px;
+  }
+}/* ==========================================================================
+   HEADER / NAVBAR (MATCHING IMAGE)
+   ========================================================================== */
+/* ==========================================================================
+   HEADER / NAVBAR
+   ========================================================================== */
+.navbar {
+  background-color: #24140B;
+  padding: 12px 36px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Nav Drawer Desktop */
+.nav-drawer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin-left: 0; /* Reset margin */
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin: 0 auto; /* Pushes links dead-center between logo and actions */
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #DDD4CC;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 0;
+  transition: color 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #FFFFFF;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background-color: #F25B1C;
+  border-radius: 2px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: auto; /* Anchors actions securely to the right edge */
+}
+
+.nav-login-link {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-size: 14.5px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.nav-login-link:hover {
+  opacity: 0.85;
+}
+
+.nav-signup-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background-color: #E85E1B;
+  color: #FFFFFF !important;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 24px;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(232, 94, 27, 0.3);
+  transition: all 0.25s ease;
+}
+
+.nav-signup-pill:hover {
+  background-color: #D34F10;
+  transform: translateY(-1px);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 6px;
+  transition: transform 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  color: #F25B1C;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET DRAWER (SCREEN WIDTH <= 868px)
+   ========================================================================== */
+@media (max-width: 868px) {
+  .navbar {
+    padding: 12px 18px;
+  }
+
+  /* Show Hamburger Icon */
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  /* Drawer collapses under the top bar */
+  .nav-drawer {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    right: 0;
+    margin-left: 0;
+    background-color: #1F1008;
+    padding: 22px 20px;
+    border-radius: 14px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    animation: drawerFadeIn 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  /* When JS toggles "open", drawer appears */
+  .nav-drawer.open {
+    display: flex;
+  }
+
+  /* Stacked links inside drawer */
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-link {
+    font-size: 15px;
+    padding: 4px 0;
+    width: 100%;
+  }
+
+  .nav-link.active::after {
+    bottom: -2px;
+    width: 40px;
+  }
+
+  /* Auth actions placed neatly inside drawer */
+  .nav-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .nav-login-link {
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    font-size: 14.5px;
+  }
+
+  .nav-signup-pill {
+    width: 100%;
+    text-align: center;
+    padding: 11px;
+    border-radius: 8px;
+  }
+}
+
+@keyframes drawerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
