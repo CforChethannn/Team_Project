@@ -2,23 +2,23 @@
    COLOR PALETTE & CORE VARIABLES
    ========================================================================== */
 :root {
-  --bg-sand: #F7F3EB;          /* Warm background */
-  --header-bg: #1B110B;        /* Dark espresso header */
-  --footer-bg: #1B110B;        /* Dark espresso footer */
-  --text-dark: #2B1D15;        /* Deep charcoal/brown heading text */
-  --text-muted: #5C524A;       /* Readable descriptive text */
-  --orange-accent: #E65A1E;    /* Signature TrackDrive orange */
-  --orange-hover: #CF4C14;
-  --form-card-bg: #FFFFFF;
+  --header-bg: #000000;        /* Pure solid black header */
+  --footer-bg: #000000;        /* Pure solid black footer */
+  --bg-sand: #FFFFFF;          /* Clean white page background */
+  --form-card-bg: #FFFFFF;     /* White card background */
+  --text-dark: #000000;        /* Primary black text */
+  --text-muted: #666666;       /* Neutral gray secondary text */
+  --orange-accent: #FF6B00;    /* Primary vibrant orange */
+  --orange-hover: #E65100;     /* Darker orange on hover */
   --tab-inactive-bg: transparent;
-  --tab-inactive-text: #6C6259;
-  --tab-active-bg: #2B1D15;
+  --tab-inactive-text: #757575;
+  --tab-active-bg: #000000;
   --tab-active-text: #FFFFFF;
-  --input-bg: #FCFAF7;
-  --input-border: #E8E1D7;
-  --input-border-focus: #E65A1E;
-  --btn-dark: #2B1D15;
-  --btn-dark-hover: #180F0A;
+  --input-bg: #FAFAFA;
+  --input-border: #E0E0E0;
+  --input-border-focus: #FF6B00;
+  --btn-dark: #000000;
+  --btn-dark-hover: #212121;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 18px;
@@ -43,12 +43,12 @@ body {
    NAVBAR & LOGO
    ========================================================================== */
 .navbar {
-  background-color: var(--header-bg);
-  padding: 10px 48px;
+  background-color: #000000; /* Pure black header */
+  padding: 14px 44px;
   position: sticky;
   top: 0;
-  z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Crisp divider line */
 }
 
 .nav-container {
@@ -1033,4 +1033,23 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}@media (max-width: 868px) {
+  .nav-drawer {
+    background-color: #000000; /* Solid black on mobile dropdown */
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
+  }
+}/* Force pure black background on the header and mobile drawer */
+header.navbar,
+.navbar {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Force mobile dropdown drawer to pure black */
+.nav-drawer,
+.nav-drawer.open {
+  background-color: #000000 !important;
+  background: #000000 !important;
 }
