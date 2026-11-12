@@ -3,12 +3,24 @@ import { motion } from 'framer-motion';
 import { LogIn, UserPlus } from 'lucide-react';
 import logo from '../assets/GoWheel-org.svg';
 
-export default function Navbar() {
-  const [activeLink, setActiveLink] = useState('Home');
+export default function Navbar({ onNavigateHome, onNavigateTrucker, currentPage }) {
+  const [activeLink, setActiveLink] = useState(currentPage === 'trucker' ? 'Trucker' : 'Home');
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Trucker', href: '#trucker' },
+    { 
+      name: 'Home', 
+      action: () => { 
+        setActiveLink('Home'); 
+        if (onNavigateHome) onNavigateHome(); 
+      } 
+    },
+    { 
+      name: 'Trucker', 
+      action: () => { 
+        setActiveLink('Trucker'); 
+        if (onNavigateTrucker) onNavigateTrucker(); 
+      } 
+    },
     { name: 'Transport Service', href: '#services' },
     { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' }
@@ -24,19 +36,20 @@ export default function Navbar() {
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '12px 32px',
-        backgroundColor: '#fff', // Glassmorphism translucent black
+        backgroundColor: '#fff',
         backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(253, 66, 2, 0.4)', // Subtle full border for pill aesthetic
-        position: 'fixed',                       // Fixed position so it floats above video
-        top: '20px',                            // Floats 20px down from the top edge
+        border: '1px solid rgba(253, 66, 2, 0.4)',
+        position: 'fixed',
+        top: '20px',
         left: '40px',
         right: '40px',
         borderRadius: '40px',
         zIndex: 1000
       }}
     >
-      {/* 1. LOGO */}
+      {/* 1. LOGO (Clicking logo goes Home) */}
       <motion.div 
+        onClick={onNavigateHome}
         style={{ 
           display: 'flex', 
           alignItems: 'center', 
@@ -60,40 +73,58 @@ export default function Navbar() {
       {/* 2. NAVIGATION LINKS */}
       <div style={{ display: 'flex', gap: '30px', alignItems: 'center', fontFamily: 'Times New Roman, serif' }}>
         {navLinks.map((link) => (
-          <motion.a
-            key={link.name}
-            href={link.href}
-            onClick={() => setActiveLink(link.name)}
-            whileHover={{ color: '#FD4202' }}
-            style={{
-              color: activeLink === link.name ? '#FD4202' : '#000',
-              textDecoration: 'none',
-              fontWeight: activeLink === link.name ? '700' : '500',
-              fontSize: '1rem',
-              position: 'relative',
-              padding: '6px 0',
-              cursor: 'pointer',
-              transition: 'color 0.2s ease'
-            }}
-          >
-            {link.name}
-            
-            {activeLink === link.name && (
-              <motion.div
-                layoutId="activeIndicator"
-                style={{
-                  position: 'absolute',
-                  bottom: '-2px',
-                  left: 0,
-                  right: 0,
-                  height: '3px',
-                  backgroundColor: '#FD4202',
-                  borderRadius: '2px'
-                }}
-                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-              />
-            )}
-          </motion.a>
+          link.action ? (
+            <motion.span
+              key={link.name}
+              onClick={link.action}
+              whileHover={{ color: '#FD4202' }}
+              style={{
+                color: activeLink === link.name ? '#FD4202' : '#000',
+                textDecoration: 'none',
+                fontWeight: activeLink === link.name ? '700' : '500',
+                fontSize: '1rem',
+                position: 'relative',
+                padding: '6px 0',
+                cursor: 'pointer',
+                transition: 'color 0.2s ease'
+              }}
+            >
+              {link.name}
+              {activeLink === link.name && (
+                <motion.div
+                  layoutId="activeIndicator"
+                  style={{
+                    position: 'absolute',
+                    bottom: '-2px',
+                    left: 0,
+                    right: 0,
+                    height: '3px',
+                    backgroundColor: '#FD4202',
+                    borderRadius: '2px'
+                  }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
+            </motion.span>
+          ) : (
+            <motion.a
+              key={link.name}
+              href={link.href}
+              onClick={() => setActiveLink(link.name)}
+              whileHover={{ color: '#FD4202' }}
+              style={{
+                color: '#000',
+                textDecoration: 'none',
+                fontWeight: '500',
+                fontSize: '1rem',
+                padding: '6px 0',
+                cursor: 'pointer',
+                transition: 'color 0.2s ease'
+              }}
+            >
+              {link.name}
+            </motion.a>
+          )
         ))}
       </div>
 
@@ -107,14 +138,13 @@ export default function Navbar() {
             color: '#000',
             border: '2px solid #000',
             padding: '8px 18px',
-            borderRadius: '20px', // Rounded to match navbar pill look
+            borderRadius: '20px',
             fontWeight: '600',
             fontSize: '0.9rem',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '6px',
-            transition: 'all 0.2s ease'
+            gap: '6px'
           }}
         >
           <LogIn size={16} /> Sign In
@@ -128,7 +158,7 @@ export default function Navbar() {
             color: '#000',
             border: 'none',
             padding: '10px 20px',
-            borderRadius: '20px', // Rounded to match navbar pill look
+            borderRadius: '20px',
             fontWeight: '700',
             fontSize: '0.9rem',
             cursor: 'pointer',
